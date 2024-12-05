@@ -326,6 +326,10 @@ class AutoTextSemanticInstructionDataset(IterableDataset):
             max_num = max(max_num, len(code))
             token.append(code)
 
+        def pad_nested_lists(nested_list, target_length, fill_value=0):
+          return [sublist + [fill_value] * (target_length - len(sublist)) if len(sublist) < target_length else sublist for sublist in nested_list]
+        tokens = pad_nested_lists(tokens, max_num)
+
         tokens = torch.tensor(tokens, dtype=torch.long)
         labels = tokens.clone()
 
