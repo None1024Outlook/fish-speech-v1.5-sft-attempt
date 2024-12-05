@@ -115,6 +115,28 @@ class FishTokenizer:
             start=[],
         )
 
+    def convert_tokens_to_ids(
+        self, 
+        ss: str | list, 
+        allowed_special: bool | set[str] = True, 
+        max_length: int = 1024, 
+        add_special_tokens: bool = False, 
+        truncation: bool = False
+    ) -> list[int]:
+        if isinstance(ss, str): return [self.encode(ss, allowed_special, max_length, add_special_tokens, truncation)]
+        elif isinstance(ss, list):
+            result = []
+            for token in ss:
+                encoded = self.encode(token, allowed_special, max_length, add_special_tokens, truncation)
+                # 根据编码结果类型判断是否需要嵌套
+                if isinstance(encoded, int):
+                    result.append([encoded])
+                else:
+                    result.extend(encoded)
+            return result
+        raise TypeError("What the fuck?")
+
+    
     def decode(self, tokens: list[int]) -> str:
         return self.tkt_model.decode(tokens)
 
