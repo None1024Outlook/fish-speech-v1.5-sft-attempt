@@ -1,5 +1,7 @@
 <div align="center">
 <h1>Fish Speech</h1>
+<h2>This is an extremely radical attempt at fine-tuning Fish Speech v1.5. Please do not use it in any projects</h2>
+<h2>这只是一个Fish Speech v1.5的SFT极其激进的尝试，请不要用于项目当中</h2>
 
 **English** | [简体中文](docs/README.zh.md) | [Portuguese](docs/README.pt-BR.md) | [日本語](docs/README.ja.md) | [한국어](docs/README.ko.md) <br>
 
