@@ -15,6 +15,7 @@ trainer:
   precision: bf16-true
   limit_val_batches: 10
   val_check_interval: 100
+  strategy: auto
 
 # Dataset Configuration
 tokenizer:
