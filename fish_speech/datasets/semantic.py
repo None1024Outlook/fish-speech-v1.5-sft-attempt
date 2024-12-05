@@ -298,7 +298,7 @@ class AutoTextSemanticInstructionDataset(IterableDataset):
         # Pack the tokens and semantics (add <s> and </s> to semantic tokens)
         tokens = (
             encoded
-            + [self.semantic_token_id] * semantic_length
+            + self.semantic_token_id * semantic_length
             + self.tokenizer.convert_tokens_to_ids(["<|im_end|>"])
         )
 
