@@ -312,7 +312,19 @@ class AutoTextSemanticInstructionDataset(IterableDataset):
         for book in codes:
             book.extend([CODEBOOK_PAD_TOKEN_ID] * 1)
 
-        tokens = [tokens] + codes
+        def flatten(lst):
+            for item in lst:
+                if isinstance(item, list):
+                    yield from flatten(item)
+                else:
+                    yield item
+        max_num = 1
+        tokens = list(flatten(tokens))
+        max_num = max(max_num, len(tokens))
+        token = [tokens]
+        for code in codes:
+            max_num = max(max_num, len(code))
+            token.append(code)
 
         tokens = torch.tensor(tokens, dtype=torch.long)
         labels = tokens.clone()
